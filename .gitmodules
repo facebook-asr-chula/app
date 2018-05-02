@@ -1,0 +1,9 @@
+[submodule "gstreamer"]
+	path = gstreamer
+	url = https://github.com/facebook-asr-chula/gstreamer
+[submodule "backend"]
+	path = backend
+	url = https://github.com/facebook-asr-chula/backend
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/facebook-asr-chula/frontend

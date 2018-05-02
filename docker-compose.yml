@@ -1,0 +1,30 @@
+version: "3"
+services:
+  gstreamer:
+    image: jcsilva/docker-kaldi-gstreamer-server:latest
+    # environment:
+      # MYSQL_ROOT_PASSWORD: my-secret-password
+    # tty: true
+    # restart: always
+    volumes:
+      - ./gstreamer:/opt/models
+    ports:
+      - "8080:80"
+    tty: true
+    command: /bin/bash -c "/opt/start.sh -y /opt/models/sample_nnet2.yaml && /bin/bash"
+  backend:
+    build: backend/.
+    image: asr/backend
+    ports: 
+      - "5000:5000"
+    # restart: always
+  frontend:
+    build: frontend/.
+    image: asr/frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+      - gstreamer
+    volumes:
+      - ./frontend/src:/app/src
